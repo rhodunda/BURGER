@@ -29,7 +29,7 @@ export const auth = (email, password) => {
             password: password,
             returnSecureToken: true
         }
-        axios.post('https://burger-builder-83a64.firebaseio.com/auth/AIzaSyBxGENkNeDsLXQyADA5X4NjuPmJmqHf3wA', authData)
+        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBxGENkNeDsLXQyADA5X4NjuPmJmqHf3wA', authData)
             .then(response => {
                 console.log(response);
                 dispatch(authSuccess(response.data))
