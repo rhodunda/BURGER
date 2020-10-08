@@ -1,3 +1,4 @@
+import axios from 'axios'
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -23,5 +24,19 @@ export const authFail = (error) => {
 export const auth = (email, password) => {
     return dispatch => {
         dispatch(authStart());
+        const authData = {
+            email: email,
+            password: password,
+            returnSecureToken: true
+        }
+        axios.post('https://burger-builder-83a64.firebaseio.com/auth/AIzaSyBxGENkNeDsLXQyADA5X4NjuPmJmqHf3wA', authData)
+            .then(response => {
+                console.log(response);
+                dispatch(authSuccess(response.data))
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(authFail(err))
+            })
     };
 };
